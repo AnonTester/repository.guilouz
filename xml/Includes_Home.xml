@@ -4555,12 +4555,13 @@
 				<aspectratio aligny="top">keep</aspectratio>
 				<visible>![!Skin.HasSetting(HideWidgetLabels) + Window.IsVisible(Home)]</visible>
 			</control>
-			<control type="image">
+			<control type="image"> <!-- Next episodes to watch thumbnail -->
 				<left>20</left>
 				<top>95</top>
 				<width>350</width>
 				<height>197</height>
-				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWatchThumbVar]</texture>
+				<!-- <texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWatchThumbVar]</texturea> -->
+				<texture background="true">$VAR[InfoWidgetThumbVar2]</texture>
 				<aspectratio aligny="top">keep</aspectratio>
 				<visible>[!Skin.HasSetting(HideWidgetLabels) + Window.IsVisible(Home)]</visible>
 			</control>

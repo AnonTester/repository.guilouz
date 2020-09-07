@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-    <defaultcontrol always="true">3012</defaultcontrol>
+    <defaultcontrol always="true">20</defaultcontrol>
     <onload>Dialog.Close(fullscreeninfo,true)</onload>
     <onload>Dialog.Close(videoosd,true)</onload>
-    <include>Animation_TopSlide</include>
     <controls>
         <control type="group">
-            <animation effect="slide" end="0,140" time="0" condition="Skin.HasSetting(ScopeMode) + String.IsEqual(Skin.String(scope_mode),$LOCALIZE[40276])">Conditional</animation>
-			<animation effect="slide" end="0,135" time="0" condition="Skin.HasSetting(ScopeMode) + String.IsEqual(Skin.String(scope_mode),$LOCALIZE[40279])">Conditional</animation>
-			<animation effect="slide" end="0,131.5" time="0" condition="Skin.HasSetting(ScopeMode) + String.IsEqual(Skin.String(scope_mode),$LOCALIZE[40275])">Conditional</animation>
-			<animation effect="slide" end="0,21" time="0" condition="Skin.HasSetting(ScopeMode) + String.IsEqual(Skin.String(scope_mode),$LOCALIZE[40278])">Conditional</animation>
+            <animation type="WindowOpen" reversible="false">
+                <effect type="fade" start="0" end="100" time="400" />
+                <effect type="slide" start="0,-181" end="0,0" time="400" />
+            </animation>
+            <animation type="WindowClose" reversible="false">
+                <effect type="fade" start="100" end="0" time="400" />
+                <effect type="slide" start="0,0" end="0,-181" time="400" />
+            </animation>
             <control type="group">
                 <height>181</height>
                 <!-- Background -->
@@ -17,7 +20,7 @@
                     <top>0</top>
                     <width>100%</width>
                     <height>181</height>
-                    <texture>dialogs/dialog-bg-nobo.png</texture>
+		    <texture colordiffuse="dd000000">nextup/bg.png</texture>
                 </control>
                 <!-- Thumb -->
                 <control type="group">
@@ -28,12 +31,12 @@
                         <left>-2</left>
                         <width>254</width>
                         <height>144</height>
-                        <texture>shadow.png</texture>
+			<texture>nextup/shadow.png</texture>
                     </control>
                     <control type="image">
                         <width>250</width>
                         <height>141</height>
-                        <texture colordiffuse="$VAR[SkinColorVar]">colors/white.png</texture>
+			<texture colordiffuse="FF12A0C7">nextup/white.jpg</texture>
                         <visible>String.IsEmpty(Window.Property(thumb)) + String.IsEmpty(Window.Property(landscape)) + String.IsEmpty(Window.Property(fanart))</visible>
                     </control>
                     <control type="textbox">
@@ -46,7 +49,7 @@
                         <shadowcolor>00000000</shadowcolor>
                         <align>center</align>
                         <aligny>center</aligny>
-                        <label>$INFO[Window.Property(tvshowtitle),[B],[/B]]</label>
+                        <label>$INFO[Window.Property(tvshowtitle)]</label>
                         <visible>String.IsEmpty(Window.Property(thumb)) + String.IsEmpty(Window.Property(landscape)) + String.IsEmpty(Window.Property(fanart))</visible>
                     </control>
                     <control type="image">
@@ -77,8 +80,8 @@
                         <righttexture></righttexture>
                         <overlaytexture></overlaytexture>
                         <lefttexture></lefttexture>
-                        <texturebg colordiffuse="00ffffff">colors/white.png</texturebg>
-                        <midtexture colordiffuse="$VAR[SkinColorVar]">colors/white.png</midtexture>
+			<texturebg colordiffuse="00ffffff">nextup/white.jpg</texturebg>
+			<midtexture colordiffuse="FFFF4081">nextup/white.jpg</midtexture>
                     </control>
                 </control>
                 <!-- Labels -->
@@ -91,13 +94,13 @@
                         <width>auto</width>
                         <height>35</height>
                         <aligny>center</aligny>
-                        <font>font25_title</font>
-                        <textcolor>$VAR[SkinColorVar]</textcolor>
+                        <font>font30_title</font>
+                        <textcolor>ffffffff</textcolor>
                         <shadowcolor>00000000</shadowcolor>
-                        <label>[COLOR white]$ADDON[service.upnext 30024] $ADDON[service.upnext 30008] $ADDON[service.upnext 30036][/COLOR] $INFO[Player.TimeRemaining(ss),,] [COLOR white]$ADDON[service.upnext 30035][/COLOR]</label>
+                        <label>$ADDON[service.upnext 30024]</label>
                     </control>
                     <!-- Details -->
-                    <control type="group">
+                    <control type="grouplist">
                         <orientation>horizontal</orientation>
                         <height>35</height>
                         <top>40</top>
@@ -106,31 +109,146 @@
                             <width>auto</width>
                             <height>30</height>
                             <aligny>center</aligny>
-                            <font>font13</font>
-                            <textcolor>$VAR[SkinColorVar]</textcolor>
+                            <font>font12</font>
+                            <textcolor>eeffffff</textcolor>
                             <shadowcolor>00000000</shadowcolor>
-                            <label>$INFO[Window.Property(tvshowtitle),[COLOR white],[/COLOR] - ]$INFO[Window.Property(season),[COLOR white],x[/COLOR]]$INFO[Window.Property(episode),[COLOR white],.[/COLOR] ]$INFO[Window.Property(title),[COLOR white],[/COLOR]]$INFO[Window.Property(year), - [COLOR white],[/COLOR]]</label>
+                            <label>$INFO[Window.Property(tvshowtitle),, - ]$INFO[Window.Property(season),S,]$INFO[Window.Property(episode),E, - ]$INFO[Window.Property(title)]   </label>
+                            <visible>!String.IsEmpty(Window.Property(title))</visible>
+                        </control>
+                        <control type="label">
+                            <width>auto</width>
+                            <height>35</height>
+                            <aligny>center</aligny>
+                            <font>font12</font>
+                            <textcolor>eeffffff</textcolor>
+                            <shadowcolor>00000000</shadowcolor>
+                            <label>$INFO[Window.Property(year),(,)   ]</label>
+                            <visible>!String.IsEmpty(Window.Property(year))</visible>
+                        </control>
+                        <control type="image">
+                            <width>19</width>
+                            <height>19</height>
+                            <aspect>keep</aspect>
+			    <texture colordiffuse="FFFF4081">nextup/star.png</texture>
+                            <animation effect="slide" end="0,8" time="0" condition="true">Conditional</animation>
+                            <visible>!String.IsEmpty(Window.Property(rating))</visible>
+                        </control>
+                        <control type="label">
+                            <width>auto</width>
+                            <height>35</height>
+                            <aligny>center</aligny>
+                            <label>$INFO[Window.Property(rating), ,   ]</label>
+                            <font>font12</font>
+                            <textcolor>eeffffff</textcolor>
+                            <shadowcolor>00000000</shadowcolor>
+                            <visible>!String.IsEmpty(Window.Property(rating))</visible>
                         </control>
                     </control>
                     <!-- Buttons -->
-                    <control type="grouplist">
+                    <control type="button" id="3012">
+                        <left>-1000</left>
+                        <top>-1000</top>
+                        <height>1</height>
+                        <width>1</width>
+                    </control>
+                    <control type="grouplist" id="20">
                         <orientation>horizontal</orientation>
-                        <height>100</height>
-						<bottom>-10</bottom>
-						<left>-20</left>
+                        <height>56</height>
+                        <bottom>20</bottom>
                         <itemgap>10</itemgap>
-                        <include content="DefaultDialogButton">
-							<param name="id" value="3012" />
-							<param name="label" value="$ADDON[service.upnext 30010]" />
-							<param name="height" value="90" />
-							<param name="width" value="340" />
-						</include>
-						<include content="DefaultDialogButton">
-							<param name="id" value="3013" />
-							<param name="label" value="$ADDON[service.upnext 30034]" />
-							<param name="height" value="90" />
-							<param name="width" value="340" />
-						</include>
+                        <control type="button" id="10">
+                            <label>    $ADDON[service.upnext 30010]</label>
+                            <onclick>SendClick(3012)</onclick>
+                            <visible>Integer.IsGreater(Player.TimeRemaining,59)</visible>
+                            <height>56</height>
+                            <width min="50">auto</width>
+                            <font>font20_title</font>
+                            <textoffsetx>55</textoffsetx>
+                            <textcolor>ddffffff</textcolor>
+                            <focusedcolor>eeffffff</focusedcolor>
+                            <selectedcolor>ddffffff</selectedcolor>
+                            <shadowcolor>22000000</shadowcolor>
+                            <aligny>center</aligny>
+                            <align>center</align>
+                            <texturefocus border="10" colordiffuse="FF172A91">nextup/button.png</texturefocus>
+                            <texturenofocus border="10" colordiffuse="FF212121">nextup/button.png</texturenofocus>
+                            <alttexturefocus border="10" colordiffuse="FF172A91">nextup/button.png</alttexturefocus>
+                            <alttexturenofocus border="10" colordiffuse="FF212121">nextup/button.png</alttexturenofocus>
+                            <pulseonselect>no</pulseonselect>
+                        </control>
+                        <control type="button" id="11">
+                            <label>    $ADDON[service.upnext 30035]</label>
+                            <onclick>SendClick(3012)</onclick>
+                            <visible>!Integer.IsGreater(Player.TimeRemaining,59)</visible>
+                            <height>56</height>
+                            <width min="50">auto</width>
+                            <font>font20_title</font>
+                            <textoffsetx>55</textoffsetx>
+                            <textcolor>ddffffff</textcolor>
+                            <focusedcolor>eeffffff</focusedcolor>
+                            <selectedcolor>ddffffff</selectedcolor>
+                            <shadowcolor>22000000</shadowcolor>
+                            <aligny>center</aligny>
+                            <align>center</align>
+                            <texturefocus border="10" colordiffuse="FF172A91">nextup/button.png</texturefocus>
+                            <texturenofocus border="10" colordiffuse="FF212121">nextup/button.png</texturenofocus>
+                            <alttexturefocus border="10" colordiffuse="FF172A91">nextup/button.png</alttexturefocus>
+                            <alttexturenofocus border="10" colordiffuse="FF212121">nextup/button.png</alttexturenofocus>
+                            <pulseonselect>no</pulseonselect>
+                        </control>
+                        <control type="button" id="3013">
+                            <label>$ADDON[service.upnext 30034]</label>
+                            <height>56</height>
+                            <width min="50">auto</width>
+                            <font>font20_title</font>
+                            <textoffsetx>15</textoffsetx>
+                            <textcolor>ddffffff</textcolor>
+                            <focusedcolor>eeffffff</focusedcolor>
+                            <selectedcolor>ddffffff</selectedcolor>
+                            <shadowcolor>22000000</shadowcolor>
+                            <aligny>center</aligny>
+                            <align>center</align>
+                            <texturefocus border="10" colordiffuse="FF172A91">nextup/button.png</texturefocus>
+                            <texturenofocus border="10" colordiffuse="FF212121">nextup/button.png</texturenofocus>
+                            <alttexturefocus border="10" colordiffuse="FF172A91">nextup/button.png</alttexturefocus>
+                            <alttexturenofocus border="10" colordiffuse="FF212121">nextup/button.png</alttexturenofocus>
+                            <pulseonselect>no</pulseonselect>
+                        </control>
+                    </control>
+                    <control type="image">
+                        <bottom>20</bottom>
+                        <width>46</width>
+                        <height>46</height>
+                        <aspect>keep</aspect>
+                        <texture colordiffuse="ddffffff">nextup/nextupicons/00.png</texture>
+                        <animation effect="slide" end="13,-5" time="0" condition="true">Conditional</animation>
+                    </control>
+                    <control type="group">
+                        <visible>!Window.IsVisible(extendedprogressdialog)</visible>
+                        <animation effect="fade" time="150">VisibleChange</animation>
+                        <control type="label">
+                            <font>font_clock</font>
+                            <shadowcolor>text_shadow</shadowcolor>
+                            <top>0</top>
+                            <right>20</right>
+                            <height>200</height>
+                            <width>600</width>
+                            <align>right</align>
+                            <label>$INFO[System.Time]</label>
+                        </control>
+                        <control type="label">
+                            <right>24</right>
+                            <top>74</top>
+                            <width>800</width>
+                            <height>100</height>
+                            <align>right</align>
+                            <itemgap>5</itemgap>
+                            <orientation>horizontal</orientation>
+                            <usecontrolcoords>true</usecontrolcoords>
+                            <label>$ADDON[service.upnext 30009]</label>
+                            <shadowcolor>text_shadow</shadowcolor>
+                            <visible>!String.IsEmpty(Window.Property(endtime))</visible>
+                        </control>
                     </control>
                 </control>
             </control>

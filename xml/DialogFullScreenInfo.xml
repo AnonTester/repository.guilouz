@@ -471,7 +471,7 @@
 				<include content="MediaFlag">
 					<param name="texture" value="flags/webdl.png" />
 					<param name="width" value="71" />
-					<param name="visible" value="String.Contains(Player.Filenameandpath,WEB-DL) | String.Contains(Player.Filenameandpath,WEBDL) | String.Contains(Player.Filenameandpath,WEB) | String.Contains(Player.Filenameandpath,web-dl) | String.Contains(Player.Filenameandpath,webdl) | String.Contains(Player.Filenameandpath,web)" />
+					<param name="visible" value="String.Contains(Player.Filenameandpath,WEB-DL) | String.Contains(Player.Filenameandpath,WEBDL) | String.Contains(Player.Filenameandpath,WEB) | String.Contains(Player.Filenameandpath,web-dl) | String.Contains(Player.Filenameandpath,webdl) | String.Contains(Player.Filenameandpath,WEB-RIP) | String.Contains(Player.Filenameandpath,WEBRIP) | String.Contains(Player.Filenameandpath,web-rip) | String.Contains(Player.Filenameandpath,webrip)" />
 					<param name="top" value="5" />
 				</include>
 				<include content="MediaFlag">

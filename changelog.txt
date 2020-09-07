@@ -1,3 +1,14 @@
+[B]3.0.9[/B]
+- Fix webrip not recognised as web-dl flag
+- Further fix for web-dl flag icon with movies with 'web' in filename
+- Fix upnext popup notifications
+
+[B]3.0.8[/B]
+- Remove xbmc.gui version requirement for Kodi19 compatibility
+
+[B]3.0.7[/B]
+* Fix missing Artist in MusicVideo views
+
 [B]3.0.6[/B]
 • Keyboard layout fixes
 • Fix for web-dl flag icon with movies have 'web' word in their names

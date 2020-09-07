@@ -191,6 +191,7 @@
 						<param name="texture" value="osd/fullscreen/buttons/information.png"/>
 					</include>
 					<onclick>ActivateWindow(fullscreeninfo)</onclick>
+					<onclick condition="!Player.PauseEnabled">PlayerControl(Play)</onclick>
 					<visible>VideoPlayer.Content(movies) | VideoPlayer.Content(episodes)</visible>
 				</control>
 				<control type="radiobutton" id="70012">
@@ -273,7 +274,51 @@
 					<onclick condition="String.IsEqual(Skin.String(scope_mode),$LOCALIZE[40277])">Skin.SetString(scope_mode,$LOCALIZE[40278])</onclick>
 					<visible>Skin.HasSetting(ScopeMode)</visible>
 				</control>
-				<control type="radiobutton" id="70043">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- context.youtube.dl.menu_start -->
+<control type="radiobutton" id="70099">
+    <include content="OSDButton">
+        <param name="texture" value="osd/fullscreen/buttons/record.png"/>
+    </include>
+    <width>64</width>
+    <height>64</height>
+    <label>Download Video</label>
+    <texturefocus>youtube_red.png</texturefocus>
+    <texturenofocus>youtube_gray.png</texturenofocus>
+    <visible>String.Contains(Player.Art(thumb),ytimg)</visible>
+    <onclick>Dialog.Close(VideoOSD)</onclick>
+    <onclick>RunAddon(context.youtube.dl.menu)</onclick>
+</control>
+<!-- context.youtube.dl.menu_end -->
+<control type="radiobutton" id="70043">
 					<include content="OSDButton">
 						<param name="texture" value="osd/fullscreen/buttons/settings.png"/>
 					</include>
@@ -363,5 +408,8 @@
 				</control>
 			</control>
 		</control>
-	</controls>
+	
+
+
+</controls>
 </window>
